@@ -30,4 +30,7 @@ public class Tecnico {
 	@Getter @Setter 
 	private LocalDate dataDeAdmissao;
 	
+	public boolean isNovo() {
+		return getId() != null && getId() == 0;
+	}
 }

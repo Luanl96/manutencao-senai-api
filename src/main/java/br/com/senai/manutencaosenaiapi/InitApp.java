@@ -1,5 +1,7 @@
 package br.com.senai.manutencaosenaiapi;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,11 +28,16 @@ public class InitApp {
 		return args -> {
 			
 			try {
-				Tecnico novoTecnico = new Tecnico();
+				/*Tecnico novoTecnico = new Tecnico();
 				novoTecnico.setNomeCompleto("Luan Lopes");
-				//LocalDate dataDeAdmissao = LocalDate.of(2023, 4, 7);
-				//novoTecnico.setDataDeAdmissao(dataDeAdmissao);
-				this.service.inserir(novoTecnico);
+				LocalDate dataDeAdmissao = LocalDate.of(2023, 4, 7);
+				novoTecnico.setDataDeAdmissao(dataDeAdmissao);
+				this.service.inserir(novoTecnico);*/
+				Tecnico tecnicoSalvo = new Tecnico();
+				tecnicoSalvo.setId(1);
+				tecnicoSalvo.setNomeCompleto("Luan Lopes");
+				tecnicoSalvo.setDataDeAdmissao(LocalDate.now());
+				this.service.alterar(tecnicoSalvo);
 				System.out.println("Técnico salvo com sucesso");
 			}catch(Exception e){
 				System.out.println(e.getMessage());
