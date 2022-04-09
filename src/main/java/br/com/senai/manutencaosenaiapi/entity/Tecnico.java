@@ -22,7 +22,7 @@ public class Tecnico {
 	
 	@NotEmpty(message = "O nome não pode ser nulo")
 	@Size(max = 100, message = "O nome não pode conter mais de 100 caracteres")
-	@Getter @Setter
+	@Getter @Setter    //Pode-se usar '@Data' no lugar dessas anotações encima da classe 'Tecnico' para que se coloque construtores e get/set nas variáveis.
 	private String nomeCompleto;
 	
 	@NotNull(message = "A data de admissão não pode ser nula")
