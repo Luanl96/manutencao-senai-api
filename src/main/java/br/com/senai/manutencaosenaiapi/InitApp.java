@@ -1,9 +1,5 @@
 package br.com.senai.manutencaosenaiapi;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import br.com.senai.manutencaosenaiapi.entity.Cliente;
-import br.com.senai.manutencaosenaiapi.entity.OrdemDeServico;
+import com.google.common.base.Optional;
+
 import br.com.senai.manutencaosenaiapi.entity.Peca;
-import br.com.senai.manutencaosenaiapi.entity.Tecnico;
+import br.com.senai.manutencaosenaiapi.repository.PecasRepository;
 import br.com.senai.manutencaosenaiapi.service.ClienteService;
 import br.com.senai.manutencaosenaiapi.service.OrdemDeServicoService;
 import br.com.senai.manutencaosenaiapi.service.PecaService;
@@ -40,17 +36,43 @@ public class InitApp {
 	@Autowired
 	private OrdemDeServicoService ordemService;
 	
+	@Autowired
+	private PecasRepository pecasRepository;
+	
 	@Bean
 	public CommandLineRunner commandlinerunner(ApplicationContext ac) {
 		return args -> {
 			
 			try {
-				OrdemDeServico novaOrdem = new OrdemDeServico();
+				
+			    /*java.util.Optional<Peca> pecaEncontrada = pecasRepository.findById(7);
+			    
+			    pecaEncontrada.get().setEspecificacoes("Não é tão boa");
+			    
+			    Peca pecaEncontrada = pecasRepository.save(pecaEncontrada.get());
+			    
+			    System.out.println()*/
+				
+				/*java.util.Optional<Peca>  pecaEncontrada = pecasRepository.findById(7);
+				if(pecaEncontrada.isPresent()) {
+					System.out.println("Peça encontrada " + pecaEncontrada.get());
+				}
+				
+				System.out.println("Peça encontrada: " + pecaEncontrada);*/
+				
+				/*Peca novaPeca = new Peca();
+				novaPeca.setDescricao("Placa Mãe Gigabit");
+				novaPeca.setEspecificacoes("Boa placa");
+				novaPeca.setQtdeEmEstoque(10);
+				this.pecasRepository.save(novaPeca);
+				Peca pecaSalva = pecasRepository.save(novaPeca);
+				System.out.println("Id da peça: " + pecaSalva.getId());*/
+				/*OrdemDeServico novaOrdem = new OrdemDeServico();
 				novaOrdem.setDescicaoDoProblema("Problema");
 				Cliente cliente = new Cliente();
 				cliente.setId(1);
 				novaOrdem.setCliente(cliente);
-				novaOrdem.setDataDeAbertura(LocalDate.now());
+				novaOrdem.setDataDeAbertura(LocalDate.now());         //testes
 				Tecnico tecnico = new Tecnico();
 				tecnico.setId(1);
 				novaOrdem.setTecnico(tecnico);
@@ -59,7 +81,7 @@ public class InitApp {
 				List<Peca> pecas = new ArrayList<Peca>();
 				pecas.add(peca);
 				novaOrdem.setPecasDoReparo(pecas);
-				this.ordemService.inserir(novaOrdem);
+				this.ordemService.inserir(novaOrdem);*/
 				/*Tecnico novoTecnico = new Tecnico();
 				novoTecnico.setNomeCompleto("Luan Lopes");
 				LocalDate dataDeAdmissao = LocalDate.of(2023, 4, 7);    //testes
@@ -93,7 +115,6 @@ public class InitApp {
 				
 			}catch(Exception e){
 				System.out.println(e.getMessage());
-				
 			}
 		};
 	}
