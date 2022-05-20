@@ -1,5 +1,4 @@
 package br.com.senai.manutencaosenaiapi.entity;
-
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -30,14 +29,16 @@ public class Tecnico {
 	@Getter @Setter
 	@EqualsAndHashCode.Include
 	private Integer id;
+	
 	@Column(name = "nm_completo")
 	@NotEmpty(message = "O nome não pode ser nulo")
-	@Size(max = 100, message = "O nome não pode conter mais de 100 caracteres")
+	@Size(max = 100, message = "O nome não deve conter mais de 100 caracteres!")
 	@Getter @Setter
 	private String nomeCompleto;
+	
 	@Column(name = "dt_admissao")
 	@NotNull(message = "A data de admissão não pode ser nula")
-	@PastOrPresent(message = "A data de admissão não pode ser posterior à data atual")
+	@PastOrPresent(message = "A data de admissão não deve ser posterior a data atual")
 	@Getter @Setter
 	private LocalDate dataDeAdmissao;
 	
@@ -45,5 +46,4 @@ public class Tecnico {
 	public boolean isNovo() {
 		return this.getId() == null || this.getId() == 0;
 	}
-	
 }

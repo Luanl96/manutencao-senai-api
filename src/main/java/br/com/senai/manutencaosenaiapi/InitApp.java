@@ -1,14 +1,11 @@
 package br.com.senai.manutencaosenaiapi;
-
 import java.awt.EventQueue;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-
 import br.com.senai.manutencaosenaiapi.view.TelaConsultaDeTipo;
 
 @SpringBootApplication
@@ -41,5 +38,4 @@ public class InitApp {
 			}
 		};
 	}
-
 }

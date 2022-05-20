@@ -1,8 +1,6 @@
 package br.com.senai.manutencaosenaiapi.view;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -13,11 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
 import br.com.senai.manutencaosenaiapi.entity.Peca;
 import br.com.senai.manutencaosenaiapi.service.PecaService;
 import javax.swing.JTextArea;
@@ -30,15 +26,15 @@ public class TelaCadastroDePeca extends JFrame {
 	private JPanel contentPane;
 	private JTextField edtId;
 	private JTextField edtDescricao;
-	private JLabel lblEspecificacoes;
-	private JTextArea jtaEspecificacoes;
+	private JLabel lblEspecificacao;
+	private JTextArea jtaEspecificacao;
 
 	@Autowired
 	private PecaService service;
 
 	@Autowired
 	@Lazy
-	private TelaConsultaDePeca telaDeConsulta;
+	private TelaConsultaDePeca telaDeConsultas;
 
 	private JTextField edtQtde;
 
@@ -71,20 +67,22 @@ public class TelaCadastroDePeca extends JFrame {
 
 					if (edtId.getText() != null && edtId.getText().length() > 0) {
 						Peca pecaSalva = new Peca();
+						
 						pecaSalva.setDescricao(edtDescricao.getText());
 						pecaSalva.setQtdeEmEstoque(Integer.parseInt(edtQtde.getText()));
-						pecaSalva.setEspecificacoes(jtaEspecificacoes.getText());
+						pecaSalva.setEspecificacoes(jtaEspecificacao.getText());
 						pecaSalva.setId(Integer.parseInt(edtId.getText()));
 						service.alterar(pecaSalva);
-						JOptionPane.showMessageDialog(contentPane, "Peça alterada com sucesso");
+						JOptionPane.showMessageDialog(contentPane, "Peça alterada com sucesso!!");
 					} else {
 						Peca novaPeca = new Peca();
+						
 						novaPeca.setDescricao(edtDescricao.getText());
 						novaPeca.setQtdeEmEstoque(Integer.parseInt(edtQtde.getText()));
-						novaPeca.setEspecificacoes(jtaEspecificacoes.getText());
+						novaPeca.setEspecificacoes(jtaEspecificacao.getText());
 						Peca pecaSalva = service.inserir(novaPeca);
 						edtId.setText(pecaSalva.getId().toString());
-						JOptionPane.showMessageDialog(contentPane, "Peça inserida com sucesso");
+						JOptionPane.showMessageDialog(contentPane, "Peça inserida com sucesso!!");
 					}
 
 				} catch (Exception ex) {
@@ -99,23 +97,23 @@ public class TelaCadastroDePeca extends JFrame {
 		edtQtde = new JTextField();
 		edtQtde.setColumns(10);
 
-		lblEspecificacoes = new JLabel("Especificações");
+		lblEspecificacao = new JLabel("Especificações");
 
-		jtaEspecificacoes = new JTextArea();
+		jtaEspecificacao = new JTextArea();
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				telaDeConsulta.setVisible(true);
+				telaDeConsultas.setVisible(true);
 				setVisible(false);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblEspecificacoes).addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblEspecificacao).addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(jtaEspecificacoes, GroupLayout.PREFERRED_SIZE, 486,
+								.addComponent(jtaEspecificacao, GroupLayout.PREFERRED_SIZE, 486,
 										GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_contentPane.createSequentialGroup()
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -148,9 +146,9 @@ public class TelaCadastroDePeca extends JFrame {
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(edtQtde, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblEspecificacoes)
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblEspecificacao)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(jtaEspecificacoes, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jtaEspecificacao, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnCancelar)
 								.addComponent(btnSalvar))));
@@ -160,7 +158,7 @@ public class TelaCadastroDePeca extends JFrame {
 	public void colocarEmEdicao(Peca pecaSalva) {
 		edtId.setText(pecaSalva.getId().toString());
 		edtDescricao.setText(pecaSalva.getDescricao());
-		jtaEspecificacoes.setText(pecaSalva.getEspecificacoes());
+		jtaEspecificacao.setText(pecaSalva.getEspecificacoes());
 		edtQtde.setText(pecaSalva.getQtdeEmEstoque().toString());
 	}
 }

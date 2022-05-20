@@ -12,7 +12,10 @@ import br.com.senai.manutencaosenaiapi.entity.TipoDePeca;
 @Repository
 public interface TipoDePecaRepository extends JpaRepository<TipoDePeca, Integer> {
 
-	@Query(value="SELECT tp FROM TipoDePeca tp WHERE Upper(tp.descricao) LIKE Upper(:descricao)")
+	@Query(value="SELECT tp "
+			+ "FROM TipoDePeca tp "
+			+ "WHERE Upper(tp.descricao) "
+			+ "LIKE Upper(:descricao)")
 	List<TipoDePeca> listarPor(@Param("descricao")String descricao);
 	
 }

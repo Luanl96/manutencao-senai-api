@@ -1,5 +1,4 @@
 package br.com.senai.manutencaosenaiapi.entity;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,30 +29,39 @@ public class OrdemDeServico {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cliente")
-	@NotNull(message = "O cliente da ordem não pode ser nulo")
+	@NotNull(message = "O cliente da ordem não deve ser nulo")
 	private Cliente cliente;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_tecnico")
-	@NotNull(message = "O técnico da ordem não pode ser nulo")
-	private Tecnico tecnico;
-	@Column(name = "dt_abertura")
-	@NotNull(message = "A data de abertura é obrigatória!")
-	@PastOrPresent(message = "A data de abertura da ordem não pode ser posterior à data atual")
-	private LocalDate dataDeAbertura;
-	@Column(name = "dt_encerramento")
-	@PastOrPresent(message = "A data de encerramento da ordem não pode ser posterior à data atual")
-	private LocalDate dataDeEncerramento;
-	@Column(name = "desc_problema")
-	@NotNull(message = "A descrição do problema é obrigatória")
-	@NotBlank(message = "A descrição do problema não foi informada")
-	private String descricaoDoProblema;
-	@Column(name = "desc_reparo")
-	private String descricaoDoReparo;
+	@NotNull(message = "O técnico da ordem não deve ser nulo")
+	private Tecnico tecnicos;
+	
+	@Column(name = "data_abertura")
+	@NotNull(message = "A data de abertura é obrigatória.")
+	@PastOrPresent(message = "A data de abertura da ordem não deve ser posterior a data atual")
+	private LocalDate dataDeAberturas;
+	
+	@Column(name = "data_encerramento")
+	@PastOrPresent(message = "A data de encerramento da ordem não deve ser posterior a data atual")
+	private LocalDate dataDeEncerramentos;
+	
+	@Column(name = "descricao_problema")
+	@NotNull(message = "A descrição do problema deve ser obrigatória")
+	@NotBlank(message = "Você não informou a descrição do problema")
+	private String descricaoDoProblemas;
+	
+	@Column(name = "descricao_reparo")
+	private String descricaoDoReparos;
+	
 	@ManyToMany
-	@JoinTable(name = "pecas_reparos", joinColumns = @JoinColumn(name = "id_ordem"), inverseJoinColumns = @JoinColumn(name = "id_peca"))
+	@JoinTable(name = "pecas_reparos", 
+	joinColumns = @JoinColumn(name = "id_ordem"), 
+	inverseJoinColumns = @JoinColumn(name = "id_peca"))
 	@NotEmpty(message = "Deve haver ao menos uma peça de reparo")
-	private List<Peca> pecasDoReparo;
+	private List<Peca> pecasDoReparos;
 	
 }

@@ -34,31 +34,37 @@ public class Cliente {
 	private Integer id;
 	
 	@Column(name = "nome")
-	@NotEmpty(message = "O nome não pode ser nulo")
-	private String nome;
+	@NotEmpty(message = "O nome não deve ser nulo!")
+	private String nomes;
+	
 	@Column(name = "sobrenome")
-	@NotEmpty(message = "O sobrenome não pode ser nulo")
-	private String sobrenome;
+	@NotEmpty(message = "O sobrenome não pode ser nulo!")
+	private String sobrenomes;
+	
 	@Column(name = "cpf")
-	@NotEmpty(message = "O CPF não pode ser nulo")
-	@Pattern(regexp = "(^\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2}$)", message = "O formato deve ser NNN.NNN.NNN-NN")
+	@NotEmpty(message = "O CPF não deve ser nulo!")
+	@Pattern(regexp = "(^\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2}$)", 
+	message = "O formato deve ser 'NNN.NNN.NNN-NN'")
 	private String cpf;
+	
 	@Column(name = "sexo")
 	@Enumerated(EnumType.STRING)
-	@NotNull(message = "O sexo é obrigatório")
+	@NotNull(message = "O sexo deve ser obrigatório")
 	private Sexo sexo;
+	
 	@Column(name = "endereco")
 	@NotEmpty(message = "O endereço não pode ser nulo")
-	private String endereco;
+	private String enderecos;
+	
 	@Column(name = "dt_nascto")
-	@NotNull(message = "A data de nascimento é obrigatória")
-	@Past(message = "A data de nascimento deve ser anterior à data atual")
-	private LocalDate dataDeNascimento;
+	@NotNull(message = "A data de nascimento é obrigatória!")
+	@Past(message = "A data de nascimento deve ser anterior a data atual!")
+	private LocalDate datasDeNascimentos;
 
 	@Transient
 	public Integer getIdade() {
-		int idade = LocalDate.now().getYear() - getDataDeNascimento().getYear();
-		return idade;
+		int idades = LocalDate.now().getYear() - getDatasDeNascimentos().getYear();
+		return idades;
 	}
 
 }

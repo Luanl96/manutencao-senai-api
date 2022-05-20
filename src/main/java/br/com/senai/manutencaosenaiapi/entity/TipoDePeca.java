@@ -1,5 +1,4 @@
 package br.com.senai.manutencaosenaiapi.entity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +21,10 @@ public class TipoDePeca {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private Integer id;
+	
 	@Column(name = "descricao")
-	@NotEmpty(message = "A descrição é obrigatória")
-	@Size(max = 150, message = "A descrição não deve conter mais de 150 caracteres")
+	@NotEmpty(message = "A descrição deve ser obrigatória!")
+	@Size(max = 150, message = "A descrição não pode conter mais de 150 caracteres!!")
 	private String descricao;
 	
 }
